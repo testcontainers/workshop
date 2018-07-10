@@ -1,13 +1,13 @@
 # Dude, r u 200 OK?
 
-One of the great features of Spring Boot is Actuator and its health endpoint. It gives you an overview how healthy your app is.
+One of the great features of Spring Boot is the Actuator and its health endpoint. It gives you an overview how healthy your app is.
 
 The context starts, but what's about the health of the app?
 
 ## Configure Rest Assured
-To check the health endpoint of our app, we will use the RestAssured library.
+To check the health endpoint of our app, we will use the [RestAssured](http://rest-assured.io/) library.
 
-But before using it, we need to configure it. Add the following to your abstract test class because we will share it between the tests:
+However before using it, we first need to configure it. Add the following to your abstract test class since we will share it between all tests:
 ```java
 protected RequestSpecification requestSpecification;
 
@@ -26,7 +26,7 @@ public void setUpAbstractIntegrationTest() {
 }
 ```
 
-Here we ask Spring Boot to inject the random port it received at the start of the app, so that we can pre-configure the RestAssured's requestSpecification.
+Here we ask Spring Boot to inject the random port it received at the start of the app, so that we can pre-configure RestAssured's requestSpecification.
 
 ## Call the endpoint
 Now let's check if the app is actually healthy by doing the following in our `DemoApplicationTest`:
@@ -71,4 +71,4 @@ Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
 Expected status code <200> but was <503>.
 ```
 
-It seems that it couldn't find Redis and there is no in-memory option for it.
+It seems that it couldn't find Redis and there is no autoconfigurable in-memory option for it.
