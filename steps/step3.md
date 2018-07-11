@@ -20,7 +20,7 @@ public void contextLoads() {
 
 Run it and verify that it starts. Spring will detect H2 on classpath and use an embedded DB.
 
-This is actually already a usefule smoke tests since it ensures, that Spring Boot is able to initialize the application context successfully.
+This is actually already a useful smoke tests since it ensures, that Spring Boot is able to initialize the application context successfully.
 
 ## Populate the database
 The context starts. However, we need to populate the DB with some data before we can write the tests.
