@@ -41,7 +41,7 @@ Check the logs.
 As you can see, Testcontainers quickly discovered your environment and connected to Docker. It did some pre-flight checks as well to ensure that you have a valid environment.
 
 ## Hint 1:
-Add the following line to your `~/.testcontainers.property` file to disable these checks and speed up the tests:
+Add the following line to your `~/.testcontainers.properties` file to disable these checks and speed up the tests:
 ```
 checks.disable=true
 ```
