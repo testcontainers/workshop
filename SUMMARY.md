@@ -9,4 +9,4 @@
 * [Step 6: Adding Redis](steps/step6.md)
 * [Step 7: Test the API](steps/step7.md)
 * [Step 8: Edge cases](steps/step8.md)
-
+* [Step 9: Selenium Tests](steps/step9.md)
