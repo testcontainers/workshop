@@ -20,7 +20,7 @@ configurations {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.testcontainers:testcontainers-bom:1.7.3'
+        mavenBom 'org.testcontainers:testcontainers-bom:1.8.1'
     }
 }
 
@@ -53,4 +53,8 @@ task acceptanceTest(type: Test) {
 }
 
 check.dependsOn acceptanceTest
-acceptanceTest.dependsOn bootJar
+
+bootJar {
+    baseName = 'app'
+}
+sourceSets.acceptanceTest.resources.srcDir jar.outputs.files.singleFile.parentFile

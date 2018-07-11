@@ -1,6 +1,9 @@
 package com.example.demo;
 
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -9,11 +12,10 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.utility.MountableFile;
 
 import java.io.File;
 import java.util.stream.Stream;
-
-import static org.testcontainers.containers.BindMode.READ_ONLY;
 
 public class SystemTest {
 
@@ -32,7 +34,7 @@ public class SystemTest {
             .withNetworkAliases("redis");
 
     private static GenericContainer sut = new GenericContainer("java:8-jre-alpine")
-            .withFileSystemBind("build/libs/workshop.jar", "/app.jar", READ_ONLY)
+            .withCopyFileToContainer(MountableFile.forClasspathResource("/app.jar"), "/")
             .withCommand("java", "-jar", "/app.jar")
             .withNetwork(net)
             .withNetworkAliases("sut")
