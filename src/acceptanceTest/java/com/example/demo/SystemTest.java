@@ -7,10 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testcontainers.containers.BrowserWebDriverContainer;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.Network;
-import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.*;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.MountableFile;
 
@@ -43,8 +40,14 @@ public class SystemTest {
             .withEnv("SPRING_DATASOURCE_URL", "jdbc:postgresql://postgres/spring")
             .withEnv("SPRING_DATASOURCE_USERNAME", "user")
             .withEnv("SPRING_DATASOURCE_PASSWORD", "secret")
+            .withEnv("SPRING_KAFKA_BOOTSTRAP-SERVERS", "kafka:9092")
             .withEnv("SPRING_REDIS_HOST", "redis")
             .withEnv("SPRING_REDIS_PORT", "6379");
+
+    private static KafkaContainer kafka = new KafkaContainer()
+            .withEmbeddedZookeeper()
+            .withNetwork(net)
+            .withNetworkAliases("kafka");
 
     @ClassRule
     public static BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
@@ -54,12 +57,12 @@ public class SystemTest {
 
     @BeforeClass
     public static void setup() {
-        Stream.of(redis, sut, postgres).parallel().forEach(GenericContainer::start);
+        Stream.of(redis, sut, postgres, kafka).parallel().forEach(GenericContainer::start);
     }
 
     @AfterClass
     public static void tearDown() {
-        Stream.of(redis, sut, postgres).parallel().forEach(GenericContainer::stop);
+        Stream.of(redis, sut, postgres, kafka).parallel().forEach(GenericContainer::stop);
     }
 
     @Test
