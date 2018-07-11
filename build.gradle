@@ -9,6 +9,15 @@ repositories {
     jcenter()
 }
 
+sourceSets {
+    acceptanceTest
+}
+
+configurations {
+    acceptanceTestCompile.extendsFrom testCompile
+    acceptanceTestRuntime.extendsFrom testRuntime
+}
+
 dependencyManagement {
     imports {
         mavenBom 'org.testcontainers:testcontainers-bom:1.7.3'
@@ -19,6 +28,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-jdbc'
     compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
     compile 'org.springframework.kafka:spring-kafka'
 
@@ -30,5 +40,17 @@ dependencies {
     testCompile 'org.testcontainers:kafka'
     testCompile 'org.awaitility:awaitility:3.0.0'
 
+    acceptanceTestCompile 'org.testcontainers:selenium'
+    acceptanceTestCompile 'org.seleniumhq.selenium:selenium-java:3.13.0'
+
     testRuntime 'com.h2database:h2'
 }
+
+task acceptanceTest(type: Test) {
+    testClassesDirs = sourceSets.acceptanceTest.output.classesDirs
+    classpath = sourceSets.acceptanceTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+check.dependsOn acceptanceTest
+acceptanceTest.dependsOn bootJar
