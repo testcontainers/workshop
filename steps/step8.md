@@ -54,7 +54,7 @@ public void setUp() {
 
 The only missing part is `LettuceConnectionFactory`'s arguments, Redis' host and port.
 
-We will use JUnit Rule for that:
+We will use a JUnit Rule for starting Redis:
 ```java
 
     @Rule

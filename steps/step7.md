@@ -72,9 +72,9 @@ public class RatingsControllerTest extends AbstractIntegrationTest {
 
 Run it, and it will fail. Why? There is no Kafka!
 
-But running Kafka in Docker is challenging and not as simple as doing `new GenericContainer`. But don't worry, there is `KafkaContainer` from Testcontainers.
+But running Kafka in Docker is challenging and not as simple as doing `new GenericContainer()`. But don't worry, this time there is `KafkaContainer` from Testcontainers.
 
-Just add it the same way as you added Redis and set `spring.kafka.bootstrap-servers` system property.
+Just add it the same way as you added Redis and set the `spring.kafka.bootstrap-servers` system property.
 
 ## Hint 1:
 Some containers expose helper methods. Check if there is one on `KafkaContainer` which might help you.

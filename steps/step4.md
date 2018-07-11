@@ -1,12 +1,12 @@
-# Your first Testcontainers integration
+# Your first Testcontainers integration test
 
-From Testcontainers website, we learn that there is a simply way of running different supported JDBC databases with Docker:  
+From the Testcontainers website, we learn that there is a simply way of running different supported JDBC databases with Docker:  
 https://www.testcontainers.org/usage/database_containers.html
 
-Especially interesting part is JDBC-url based containers:  
+An especially interesting part are JDBC-URL based containers:  
 https://www.testcontainers.org/usage/database_containers.html#jdbc-url
 
-It means that starting using Testcontainers in our project (once we add a dependency) is as simple as changing a few properties in Spring Boot:
+It means that starting to use Testcontainers in our project (once we add a dependency) is as simple as changing a few properties in Spring Boot:
 ```java
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = {
  "spring.datasource.url=jdbc:tc:postgresql:10-alpine://testcontainers/workshop",
@@ -16,8 +16,8 @@ It means that starting using Testcontainers in our project (once we add a depend
 
 If we split the magical JDBC url, we get:
 - `jdbc:tc:` - this part says that we should use Testcontainers as JDBC provider
-- `postgresql:10-alpine://` - we use postgresql database, and we select PostgreSQL 10 from Docker Hub as the image
-- `testcontainers/workshop` - the host name (can be anything) is `testcontainers` and the database name is `workshop`. You choose.
+- `postgresql:10-alpine://` - we use a PostgreSQL database, and we select PostgreSQL 10 from the Docker Hub as the image
+- `testcontainers/workshop` - the host name (can be anything) is `testcontainers` and the database name is `workshop`. Your choice!
 
 Add the following properties and run the test again. Fixed? Good!
 
@@ -41,12 +41,12 @@ Check the logs.
 As you can see, Testcontainers quickly discovered your environment and connected to Docker. It did some pre-flight checks as well to ensure that you have a valid environment.
 
 ## Hint 1:
-add the following line to your `~/.testcontainers.property` file to disable the checks and speed up the tests:
+Add the following line to your `~/.testcontainers.property` file to disable these checks and speed up the tests:
 ```
 checks.disable=true
 ```
 
 ## Hint 2:
-Changing PostgreSQL version is as simple as replacing `10-alpine` with `9-alpine` for example. 
+Changing the PostgreSQL version is as simple as replacing `10-alpine` with, for example, `9-alpine`. 
 
-Try it, but don't forget that it will download the image from the internet, but only if it's not present on your computer.
+Try it, but don't forget that it will download the image from the internet, if it's not already present on your computer.
