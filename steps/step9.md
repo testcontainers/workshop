@@ -3,7 +3,7 @@
 Let's do a complete blackbox system test this time, interacting with our application using a real 
 Browser instrumented by Selenium.
 
-Again Testcontainers has you covered, by providing the `BroserWerdriverContainer` class.
+Again Testcontainers has you covered, by providing the `BrowserWebdriverContainer` class.
 
 This time, we'll create a test class `com.example.demo.SystemTest` in the `acceptanceTest` source directory.
 Here we'll setup our complete system and also our application in a container. 
