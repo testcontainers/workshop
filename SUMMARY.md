@@ -1,12 +1,13 @@
-# Summary
+# Table of contents
 
 * [Introduction](README.md)
-* [Step 1: Getting Started](steps/step1.md)
-* [Step 2: Exploring the app](steps/step2.md)
-* [Step 3: Adding some tests](steps/step3.md)
-* [Step 4: Your first Testcontainers integration](steps/step4.md)
-* [Step 5: Dude, r u 200 OK?](steps/step5.md)
-* [Step 6: Adding Redis](steps/step6.md)
-* [Step 7: Test the API](steps/step7.md)
-* [Step 8: Edge cases](steps/step8.md)
-* [Step 9: Selenium Tests](steps/step9.md)
+* [Step 1: Getting Started](step-1-getting-started.md)
+* [Step 2: Exploring the app](step-2-exploring-the-app.md)
+* [Step 3: Adding some tests](step-3-adding-some-tests.md)
+* [Step 4: Your first Testcontainers integration](step-4-your-first-testcontainers-integration.md)
+* [Step 5: Dude, r u 200 OK?](step-5-dude-r-u-200-ok.md)
+* [Step 6: Adding Redis](step-6-adding-redis.md)
+* [Step 7: Test the API](step-7-test-the-api.md)
+* [Step 8: Edge cases](step-8-edge-cases.md)
+* [Step 9: Selenium Tests](step-9-selenium-tests.md)
+

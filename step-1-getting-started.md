@@ -1,8 +1,10 @@
-# Getting started
+# Step 1: Getting Started
 
 ## Check Docker
+
 Make sure you have Docker installed on your machine by running the following command:
-```
+
+```text
 $ docker version
 
 Client:
@@ -29,21 +31,23 @@ Server:
 ## Download the project
 
 Clone the following project from GitHub to your computer:  
-https://github.com/testcontainers/workshop
+[https://github.com/testcontainers/workshop](https://github.com/testcontainers/workshop)
 
-## (optionally) Build the project to download the dependencies
-```
+## \(optionally\) Build the project to download the dependencies
+
+```text
 ./gradlew build -x check
 ```
 
+## \(optionally\) Pull the required images before doing the workshop
 
-## (optionally) Pull the required images before doing the workshop
-```
+```text
 $ docker pull postgres:10-alpine
 $ docker pull redis:3-alpine
 $ docker pull confluentinc/cp-kafka:4.0.0
 ```
 
-## (Windows only) Expose Docker daemon on TCP without TLS
-Check the instructions for using Testcontainers on Windows in the officials docs:
-https://www.testcontainers.org/usage/windows_support.html
+## \(Windows only\) Expose Docker daemon on TCP without TLS
+
+Check the instructions for using Testcontainers on Windows in the officials docs: [https://www.testcontainers.org/usage/windows\_support.html](https://www.testcontainers.org/usage/windows_support.html)
+

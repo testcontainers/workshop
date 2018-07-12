@@ -1,19 +1,14 @@
-# Selenium Tests
+# Step 9: Selenium Tests
 
-Let's do a complete blackbox system test this time, interacting with our application using a real 
-Browser instrumented by Selenium.
+Let's do a complete blackbox system test this time, interacting with our application using a real Browser instrumented by Selenium.
 
 Again Testcontainers has you covered, by providing the `BroserWerdriverContainer` class.
 
-This time, we'll create a test class `com.example.demo.SystemTest` in the `acceptanceTest` source directory.
-Here we'll setup our complete system and also our application in a container. 
-We'll also be able to use Testcontainer's networking feature, so all containers are able to speak to each other 
-using the Docker network and their DNS names.
+This time, we'll create a test class `com.example.demo.SystemTest` in the `acceptanceTest` source directory. Here we'll setup our complete system and also our application in a container. We'll also be able to use Testcontainer's networking feature, so all containers are able to speak to each other using the Docker network and their DNS names.
 
 The `BroserWerdriverContainer` has a nice feature, allowing you to save everything thas happens a a video.
 
 ```java
-
 package com.example.demo;
 
 import org.junit.AfterClass;
@@ -92,6 +87,5 @@ public class SystemTest {
     }
 
 }
-
-
 ```
+
