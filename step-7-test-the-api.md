@@ -1,4 +1,4 @@
-# Test the API
+# Step 7: Test the API
 
 Now let's create a real test for our API which will verify the business logic.
 
@@ -77,10 +77,14 @@ But running Kafka in Docker is challenging and not as simple as doing `new Gener
 Just add it the same way as you added Redis and set the `spring.kafka.bootstrap-servers` system property.
 
 ## Hint 1:
+
 Some containers expose helper methods. Check if there is one on `KafkaContainer` which might help you.
 
 ## Hint 2:
+
 You can start a few containers in parallel by doing:
+
 ```java
 Stream.of(redis, kafka).parallel().forEach(GenericContainer::start);
 ```
+
