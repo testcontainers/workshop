@@ -10,3 +10,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  output:
+    ansi:
+      enabled: always
