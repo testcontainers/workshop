@@ -16,3 +16,4 @@ out/
 
 
 /src/test/java
+/src/test/resources/schema.sql
