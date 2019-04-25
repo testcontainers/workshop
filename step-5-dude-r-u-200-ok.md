@@ -18,6 +18,7 @@ private int localServerPort;
 
 @Before
 public void setUpAbstractIntegrationTest() {
+    RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     requestSpecification = new RequestSpecBuilder()
             .setPort(localServerPort)
             .addHeader(
