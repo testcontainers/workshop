@@ -4,7 +4,7 @@ The app doesn't have any tests yet. But before we write our first test, let's cr
 
 ## Abstract class
 
-Add `com.example.demo.support.AbstractIntegrationTest` class to `src/main/test` sourceset. It should be an abstract class with standard Spring Boot's testing framework annotations on it:
+Add `com.example.demo.support.AbstractIntegrationTest` class to `src/test/java` sourceset. It should be an abstract class with standard Spring Boot's testing framework annotations on it:
 
 ```java
 @RunWith(SpringRunner.class)
