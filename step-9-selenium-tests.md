@@ -62,7 +62,7 @@ public class SystemTest {
 
     @ClassRule
     public static BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
-            .withDesiredCapabilities(DesiredCapabilities.chrome())
+            .withCapabilities(DesiredCapabilities.chrome())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL, new File("build"))
             .withNetwork(net);
 
