@@ -20,7 +20,7 @@ configurations {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.testcontainers:testcontainers-bom:1.10.7'
+        mavenBom 'org.testcontainers:testcontainers-bom:1.11.2'
     }
 }
 
