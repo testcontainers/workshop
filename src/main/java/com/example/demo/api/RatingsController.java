@@ -10,7 +10,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
 import java.util.Map;
 
 @RestController
@@ -30,16 +29,14 @@ public class RatingsController {
     TalksRepository talksRepository;
 
     @PostMapping
-    public Mono<ResponseEntity<Object>> recordRating(@RequestBody Rating rating) throws Exception {
-        return talksRepository.exists(rating.getTalkId())
-                .filter(Boolean.TRUE::equals)
-                .flatMap(__ -> Mono
-                        .fromCompletionStage(
-                                kafkaTemplate.send("ratings", rating).completable()
-                        )
-                        .thenReturn(ResponseEntity.accepted().build())
-                )
-                .defaultIfEmpty(ResponseEntity.badRequest().build());
+    public ResponseEntity<Object> recordRating(@RequestBody Rating rating) throws Exception {
+
+        if (!talksRepository.exists(rating.getTalkId())) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        kafkaTemplate.send("ratings", rating).get();
+        return ResponseEntity.accepted().build();
     }
 
     @GetMapping
