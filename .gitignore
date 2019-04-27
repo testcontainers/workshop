@@ -15,5 +15,5 @@ out/
 /_book/
 
 
-/src/test/java
-/src/test/resources/schema.sql
+/src/test
+/src/acceptanceTest
