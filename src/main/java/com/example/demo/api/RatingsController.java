@@ -43,8 +43,7 @@ public class RatingsController {
     }
 
     @GetMapping
-    public Mono<Map<Integer, Integer>> getRatings(@RequestParam String talkId) {
-        return ratingsRepository.findAll(talkId)
-                .defaultIfEmpty(Collections.emptyMap());
+    public Map<Integer, Integer> getRatings(@RequestParam String talkId) {
+        return ratingsRepository.findAll(talkId);
     }
 }
