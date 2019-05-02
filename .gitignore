@@ -15,4 +15,5 @@ out/
 /_book/
 
 
-/src/test/java
+/src/test
+/src/acceptanceTest

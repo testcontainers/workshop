@@ -1,9 +1,9 @@
 # Step 6: Adding Redis
 
-If you check Testcontainers' modules, you'll see that there is no Redis module \(at least not yet ;\)\): [https://github.com/testcontainers/testcontainers-java/tree/1.8.1/modules](https://github.com/testcontainers/testcontainers-java/tree/1.8.1/modules)
+If you check Testcontainers' modules, you'll see that there is no Redis module \(at least not yet ;\)\): [https://github.com/testcontainers/testcontainers-java/tree/1.11.2/modules](https://github.com/testcontainers/testcontainers-java/tree/1.11.2/modules)
 
 But it doesn't mean you can't use the library if something is not wrapped with Testcontainers because you can do it yourself thanks to `GenericContainer`:  
-[https://www.testcontainers.org/usage/generic\_containers.html\#benefits](https://www.testcontainers.org/usage/generic_containers.html#benefits)
+[https://www.testcontainers.org/usage/generic\_containers.html](https://www.testcontainers.org/usage/generic_containers.html)
 
 But Redis is not JDBC based and we can't just add a property. Yet, the integration is trivial.
 
