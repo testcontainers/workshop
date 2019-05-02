@@ -29,7 +29,7 @@ public class SystemTest {
 
     private static Network net = Network.newNetwork();
 
-    private static PostgreSQLContainer postgres = (PostgreSQLContainer) new PostgreSQLContainer()
+    private static PostgreSQLContainer postgres = (PostgreSQLContainer) new PostgreSQLContainer("postgres:10-alpine")
             .withDatabaseName("spring")
             .withUsername("user")
             .withPassword("secret")
@@ -41,7 +41,7 @@ public class SystemTest {
             .withNetwork(net)
             .withNetworkAliases("redis");
 
-    private static GenericContainer sut = new GenericContainer("java:8-jre-alpine")
+    private static GenericContainer sut = new GenericContainer("openjdk:8-jre-alpine")
             .withCopyFileToContainer(MountableFile.forClasspathResource("/app.jar"), "/")
             .withCommand("java", "-jar", "/app.jar")
             .withNetwork(net)
