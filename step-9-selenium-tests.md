@@ -29,7 +29,7 @@ public class SystemTest {
 
     private static Network net = Network.newNetwork();
 
-    private static PostgreSQLContainer postgres = (PostgreSQLContainer) new PostgreSQLContainer("postgres:10-alpine")
+    private static PostgreSQLContainer postgres = new PostgreSQLContainer<>("postgres:10-alpine")
             .withDatabaseName("spring")
             .withUsername("user")
             .withPassword("secret")
@@ -61,7 +61,7 @@ public class SystemTest {
             .withNetworkAliases("kafka");
 
     @ClassRule
-    public static BrowserWebDriverContainer browser = (BrowserWebDriverContainer) new BrowserWebDriverContainer()
+    private static BrowserWebDriverContainer browser = new BrowserWebDriverContainer<>()
             .withDesiredCapabilities(DesiredCapabilities.chrome())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL, new File("build"))
             .withNetwork(net);
