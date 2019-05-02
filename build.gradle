@@ -27,9 +27,9 @@ dependencyManagement {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.springframework.boot:spring-boot-starter-jdbc'
-    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    compile 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
     compile 'org.springframework.kafka:spring-kafka'
 
     compile 'org.postgresql:postgresql'
