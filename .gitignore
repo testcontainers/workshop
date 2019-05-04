@@ -16,4 +16,7 @@ out/
 
 
 /src/test/java/**/*.java
+/src/test/resources/**/*.sql
+
 /src/acceptanceTest/java/**/*.java
+/src/acceptanceTest/resources/**/*.sql
