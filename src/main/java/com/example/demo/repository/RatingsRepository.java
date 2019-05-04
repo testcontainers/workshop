@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 @Repository
 public class RatingsRepository {
 
-    private final StringRedisTemplate redisTemplate;
+    final StringRedisTemplate redisTemplate;
 
     public RatingsRepository(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;

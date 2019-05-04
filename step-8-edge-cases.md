@@ -38,20 +38,15 @@ public class RatingsRepositoryTest {
 But since we're not using Spring Context here, we need to create an instance of our repository ourselves:
 
 ```java
-@Before
-public void setUp() {
-    LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(
-            ?,
-            ?
-    );
-    connectionFactory.afterPropertiesSet();
-    repository = new RatingsRepository(
-            new ReactiveRedisTemplate<>(
-                    connectionFactory,
-                    RedisSerializationContext.string()
-            )
-    );
-}
+    @Before
+    public void setUp() {
+        LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(
+                ?,
+                ?
+        );
+        connectionFactory.afterPropertiesSet();
+        repository = new RatingsRepository(new StringRedisTemplate(connectionFactory));
+    }
 ```
 
 The only missing part is `LettuceConnectionFactory`'s arguments, Redis' host and port.
