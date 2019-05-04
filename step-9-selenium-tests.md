@@ -46,7 +46,7 @@ public class EndToEndTest extends AbstractIntegrationTest {
 With the addition of this test code on top of `AbstractIntegrationTest`,we now have the following arrangement of components in our test:
 
 
-<img src='https://g.gravizo.com/svg?
+![Component structure diagram](https://g.gravizo.com/svg?
 digraph G {
     subgraph cluster_1 {
         label="JVM";
@@ -67,7 +67,7 @@ digraph G {
     "Selenium+Browser container" -> "Spring Boot Service" [color=blue, label="?"];
     "JUnit tests" -> "Spring Boot Service" [label=starts];
 }
-'>
+)
 
 ## Talking to our service
 
