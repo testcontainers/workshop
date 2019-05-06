@@ -89,3 +89,4 @@ With this information, update the TODOs in the test class and see what happens.
 
 * The `BrowserWebDriverContainer` has a nice feature that allows test runs to be saved to a video, either for all tests or just failing tests. Check the documentation, and give this a try.
 * `BrowserWebDriverContainer` exposes a `getVncAddress()` method. Can you use this on your local machine to watch tests as they run via VNC? Even better, try and use the browser's inspect tools while stopped on a breakpoint in your tests!
+* You can find some additional ideas [here](https://bsideup.github.io/posts/debugging_containers/) how to use a fixed port for local development and debugging by leveraging a tcp-proxy
