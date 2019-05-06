@@ -44,10 +44,8 @@ Clone the following project from GitHub to your computer:
 ```text
 $ docker pull postgres:10-alpine
 $ docker pull redis:3-alpine
+$ docker pull openjdk:8-jre-alpine
 $ docker pull confluentinc/cp-kafka:4.0.0
 ```
 
-## \(Windows only\) Expose Docker daemon on TCP without TLS
-
-Check the instructions for using Testcontainers on Windows in the officials docs: [https://www.testcontainers.org/usage/windows\_support.html](https://www.testcontainers.org/usage/windows_support.html)
 

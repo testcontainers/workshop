@@ -14,7 +14,7 @@ Check `com.example.demo.repository.TalksRepository`.
 
 ### Redis
 
-We store the ratings in Redis database with Spring Data Redis \(Reactive\)
+We store the ratings in Redis database with Spring Data Redis.
 
 Check `com.example.demo.repository.RatingsRepository`.
 
@@ -26,7 +26,7 @@ Check `com.example.demo.streams.RatingsListener`.
 
 ## API
 
-The API is a Spring Webflux controller \(`com.example.demo.api.RatingsController`\) and exposes two endpoints:
+The API is a Spring Web REST controller \(`com.example.demo.api.RatingsController`\) and exposes two endpoints:
 
 * `POST /ratings { "talkId": ?, "value": 1-5 }` to add a rating for a talk
 * `GET /ratings?talkId=?` to get the histogram of ratings of the given talk
