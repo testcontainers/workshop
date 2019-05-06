@@ -10,7 +10,10 @@ repositories {
 }
 
 sourceSets {
-    acceptanceTest
+    acceptanceTest {
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
 }
 
 configurations {
