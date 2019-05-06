@@ -42,9 +42,9 @@ Clone the following project from GitHub to your computer:
 ## \(optionally\) Pull the required images before doing the workshop
 
 ```text
-$ docker pull postgres:10-alpine
-$ docker pull redis:3-alpine
-$ docker pull confluentinc/cp-kafka:4.0.0
+docker pull postgres:10-alpine
+docker pull redis:3-alpine
+docker pull confluentinc/cp-kafka:4.0.0
 ```
 
 
