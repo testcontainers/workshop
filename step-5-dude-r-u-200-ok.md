@@ -14,7 +14,7 @@ However before using it, we first need to configure it. Add the following to you
 protected RequestSpecification requestSpecification;
 
 @LocalServerPort
-private int localServerPort;
+protected int localServerPort;
 
 @Before
 public void setUpAbstractIntegrationTest() {
