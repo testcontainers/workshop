@@ -44,6 +44,7 @@ Clone the following project from GitHub to your computer:
 ```text
 docker pull postgres:10-alpine
 docker pull redis:3-alpine
+docker pull openjdk:8-jre-alpine
 docker pull confluentinc/cp-kafka:4.0.0
 ```
 

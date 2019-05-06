@@ -21,16 +21,15 @@ public class RatingsRepositoryTest {
 
     @Test
     public void testEmptyIfNoKey() {
-        assertThat(repository.findAll(talkId).block()).isEmpty();
+        assertThat(repository.findAll(talkId)).isEmpty();
     }
 
     @Test
     public void testLimits() {
-        repository.redisOperations.opsForHash()
-                .put(repository.toKey(talkId), "5", Long.MAX_VALUE + "")
-                .block();
+        repository.redisTemplate.opsForHash()
+                .put(repository.toKey(talkId), "5", Long.MAX_VALUE + "");
 
-        repository.add(talkId, 5).block();
+        repository.add(talkId, 5);
     }
 }
 ```
