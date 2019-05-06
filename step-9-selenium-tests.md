@@ -61,7 +61,7 @@ public class SystemTest {
             .withNetworkAliases("kafka");
 
     @ClassRule
-    private static BrowserWebDriverContainer browser = new BrowserWebDriverContainer<>()
+    public static BrowserWebDriverContainer browser = new BrowserWebDriverContainer<>()
             .withCapabilities(DesiredCapabilities.chrome())
             .withRecordingMode(BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL, new File("build"))
             .withNetwork(net);
