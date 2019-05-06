@@ -43,7 +43,7 @@ public class EndToEndTest extends AbstractIntegrationTest {
 
 ## Component structure
 
-With the addition of this test code on top of `AbstractIntegrationTest`,we now have the following arrangement of components in our test:
+With the addition of this test code on top of `AbstractIntegrationTest`, we now have the following arrangement of components in our test:
 
 
 ![Component structure diagram](https://kroki.io/graphviz/svg/eNp9UU1rAkEMvfdXhL1WD_VaVBBBUISitheRMjvGdXA6kSTbHor_vbt1dUddzW1e8j6SWbuMzX4LI_h9gqIkT4-A9bko8udL1SjLmxR9Nxl_TJPXM5jM9-xCBgMihTnyt7MYt8fvwSkoikoFH5qdOrdOi4JlKahxAVlgSHaHDDUS-byRaMYoNTIxm52pnzNcO4ljo8fg8q_nAdOPxLIXMRvXg3bvyvDuWJTi7kwU7eJcZe9RTlhWdyohJp-sTkYPOP-aTUGWljxxN_U5tk4f0D9L3uZq1DjyRA2rFNTDH-PTt5w=)
