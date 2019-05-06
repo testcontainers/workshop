@@ -24,7 +24,7 @@ public class RatingsControllerTest extends AbstractIntegrationTest {
                 .when()
                 .post("/ratings")
                 .then()
-                .statusLine("HTTP/1.1 202 Accepted");
+                .statusCode(202);
 
         await().untilAsserted(() -> {
             given(requestSpecification)
@@ -65,7 +65,7 @@ public class RatingsControllerTest extends AbstractIntegrationTest {
                 .when()
                 .post("/ratings")
                 .then()
-                .statusLine("HTTP/1.1 400 Bad Request");
+                .statusCode(400);
     }
 }
 ```
