@@ -65,7 +65,7 @@ public class RatingsControllerTest extends AbstractIntegrationTest {
                 .when()
                 .post("/ratings")
                 .then()
-                .statusCode(400);
+                .statusCode(404);
     }
 }
 ```

@@ -4,6 +4,8 @@ spring:
   datasource:
     initialization-mode: always
   kafka:
+    listener:
+      missingTopicsFatal: false
     consumer:
       properties.spring.json.trusted.packages: com.example.demo.model
       auto-offset-reset: earliest

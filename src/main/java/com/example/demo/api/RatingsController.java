@@ -3,7 +3,6 @@ package com.example.demo.api;
 import com.example.demo.model.Rating;
 import com.example.demo.repository.RatingsRepository;
 import com.example.demo.repository.TalksRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -16,9 +15,6 @@ import java.util.Map;
 public class RatingsController {
 
     @Autowired
-    ObjectMapper objectMapper;
-
-    @Autowired
     KafkaTemplate<String, Rating> kafkaTemplate;
 
     @Autowired
@@ -29,9 +25,8 @@ public class RatingsController {
 
     @PostMapping
     public ResponseEntity<Object> recordRating(@RequestBody Rating rating) throws Exception {
-
         if (!talksRepository.exists(rating.getTalkId())) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
 
         kafkaTemplate.send("ratings", rating).get();
