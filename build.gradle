@@ -37,7 +37,9 @@ dependencies {
 
     compile 'org.postgresql:postgresql'
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile ('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.jupiter', module: 'junit-jupiter-api'
+    }
     testCompile 'io.rest-assured:rest-assured:3.1.0'
     testCompile 'org.testcontainers:postgresql'
     testCompile 'org.testcontainers:kafka'
