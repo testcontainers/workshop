@@ -35,8 +35,14 @@ Clone the following project from GitHub to your computer:
 
 ## \(optionally\) Build the project to download the dependencies
 
+With Gradle:
 ```text
 ./gradlew build -x check
+```
+
+With Maven:
+```text
+./mvnw verify
 ```
 
 ## \(optionally\) Pull the required images before doing the workshop

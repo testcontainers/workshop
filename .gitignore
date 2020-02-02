@@ -3,8 +3,13 @@
 .gradle/
 build/
 out/
+target/
 
 .vscode/
+/.project
+/.classpath
+/.settings/
+/bin/
 
 .idea
 *.iml
@@ -16,4 +21,6 @@ out/
 
 
 /src/test
+!/src/test/java/com/example/demo/.keep
+!/src/test/resources/logback-test.xml
 /src/acceptanceTest
