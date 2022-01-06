@@ -15,7 +15,7 @@ public class EndToEndTest extends AbstractIntegrationTest {
 
     private BrowserWebDriverContainer browser;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         // TODO: add something here
 
@@ -34,7 +34,7 @@ public class EndToEndTest extends AbstractIntegrationTest {
         assertEquals(content.getText(), "Foobar");
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         browser.stop();
     }

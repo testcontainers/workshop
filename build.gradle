@@ -17,7 +17,7 @@ sourceSets {
 
 configurations {
     acceptanceTestImplementation.extendsFrom testImplementation
-    acceptanceTestRuntime.extendsFrom testRuntime
+    acceptanceTestRuntime.extendsFrom testRuntimeOnly
 }
 
 dependencyManagement {
@@ -34,7 +34,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.kafka:spring-kafka'
 
-    runtimeOnly 'org.postgresql:postgresql'
+    // so acceptanceTest have them available as well, was not really working with the other scops
+    implementation 'org.postgresql:postgresql'
 
     testRuntimeOnly 'com.h2database:h2'
 
@@ -54,13 +55,11 @@ task acceptanceTest(type: Test) {
     testClassesDirs = sourceSets.acceptanceTest.output.classesDirs
     classpath = sourceSets.acceptanceTest.runtimeClasspath
     outputs.upToDateWhen { false }
+    useJUnitPlatform()
 }
 
 check.dependsOn acceptanceTest
 
-bootJar {
-    baseName = 'app'
-}
 sourceSets.acceptanceTest.resources.srcDir jar.outputs.files.singleFile.parentFile
 
 test {

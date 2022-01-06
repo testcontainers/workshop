@@ -90,6 +90,6 @@ Some containers expose helper methods. Check if there is one on `KafkaContainer`
 You can start several containers in parallel by doing:
 
 ```java
-  Startables.deepStart(redis, kafka);
+Stream.of(redis, kafka).parallel().forEach(GenericContainer::start);
 ```
 
