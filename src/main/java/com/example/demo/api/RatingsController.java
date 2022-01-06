@@ -25,7 +25,7 @@ public class RatingsController {
 
     @PostMapping
     public ResponseEntity<Object> recordRating(@RequestBody Rating rating) throws Exception {
-        if (!talksRepository.exists(rating.getTalkId())) {
+        if (!talksRepository.exists(rating.talkId())) {
             return ResponseEntity.notFound().build();
         }
 
