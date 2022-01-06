@@ -1,9 +1,8 @@
 plugins {
-    id "java"
-    id "org.springframework.boot" version "2.2.0.RELEASE"
+    id 'org.springframework.boot' version '2.6.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
-
-apply plugin: 'io.spring.dependency-management'
 
 repositories {
     jcenter()
@@ -17,38 +16,35 @@ sourceSets {
 }
 
 configurations {
-    acceptanceTestCompile.extendsFrom testCompile
+    acceptanceTestImplementation.extendsFrom testImplementation
     acceptanceTestRuntime.extendsFrom testRuntime
 }
 
 dependencyManagement {
     imports {
-        mavenBom 'org.testcontainers:testcontainers-bom:1.12.5'
+        mavenBom 'org.testcontainers:testcontainers-bom:1.16.2'
     }
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-actuator'
-    compile 'org.springframework.boot:spring-boot-starter-jdbc'
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    compile 'org.springframework.boot:spring-boot-starter-data-redis'
-    compile 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.kafka:spring-kafka'
 
-    compile 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
 
-    testCompile ('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.jupiter', module: 'junit-jupiter-api'
-    }
-    testCompile 'io.rest-assured:rest-assured:3.1.0'
-    testCompile 'org.testcontainers:postgresql'
-    testCompile 'org.testcontainers:kafka'
-    testCompile 'org.awaitility:awaitility:3.0.0'
+    testRuntimeOnly 'com.h2database:h2'
 
-    acceptanceTestCompile 'org.testcontainers:selenium'
-    acceptanceTestCompile 'org.seleniumhq.selenium:selenium-java:3.13.0'
+    testImplementation 'io.rest-assured:rest-assured:3.1.0'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.testcontainers:kafka'
+    testImplementation 'org.awaitility:awaitility:3.0.0'
 
-    testRuntime 'com.h2database:h2'
+    acceptanceTestImplementation 'org.testcontainers:selenium'
+    acceptanceTestImplementation 'org.seleniumhq.selenium:selenium-java:3.13.0'
 }
 
 task acceptanceTest(type: Test) {
@@ -66,4 +62,5 @@ sourceSets.acceptanceTest.resources.srcDir jar.outputs.files.singleFile.parentFi
 
 test {
     environment "LOG_DATEFORMAT_PATTERN", "HH:mm:ss.SSS"
+    useJUnitPlatform()
 }

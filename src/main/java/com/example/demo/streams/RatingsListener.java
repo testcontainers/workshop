@@ -14,7 +14,7 @@ public class RatingsListener {
     RatingsRepository ratingsRepository;
 
     @KafkaListener(groupId = "ratings", topics = "ratings")
-    public void handle(@Payload Rating rating) throws Exception {
+    public void handle(@Payload Rating rating) {
         System.out.println("Received rating: " + rating);
 
         ratingsRepository.add(rating.getTalkId(), rating.getValue());
