@@ -1,6 +1,6 @@
 # Step 2: Exploring the app
 
-The app is a simple micro-service based on Spring Boot for rating conference talks. It provides an API to track the ratings of the talks in real time.
+The app is a simple microservice based on Spring Boot for rating conference talks. It provides an API to track the ratings of the talks in real time.
 
 ## Storage
 
@@ -8,7 +8,7 @@ The app is a simple micro-service based on Spring Boot for rating conference tal
 
 When a rating is submitted, we must verify that the talk for the given ID is present in our database.
 
-Our database of choice is PostgreSQL 10, accessed with Spring JDBC.
+Our database of choice is PostgreSQL, accessed with Spring JDBC.
 
 Check `com.example.demo.repository.TalksRepository`.
 

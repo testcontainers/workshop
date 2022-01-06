@@ -1,6 +1,7 @@
 # Step 5: Dude, r u 200 OK?
 
-One of the great features of Spring Boot is the Actuator and its health endpoint. It gives you an overview how healthy your app is.
+One of the great features of Spring Boot is the Actuator and its health endpoint. 
+It gives you an overview how healthy your app is.
 
 The context starts, but what's about the health of the app?
 
@@ -8,7 +9,8 @@ The context starts, but what's about the health of the app?
 
 To check the health endpoint of our app, we will use the [RestAssured](http://rest-assured.io/) library.
 
-However before using it, we first need to configure it. Add the following to your abstract test class since we will share it between all tests:
+However, before using it, we first need to configure it. 
+Add the following to your abstract test class since we will share it between all tests:
 
 ```java
 protected RequestSpecification requestSpecification;
@@ -16,7 +18,7 @@ protected RequestSpecification requestSpecification;
 @LocalServerPort
 protected int localServerPort;
 
-@Before
+@BeforeEach
 public void setUpAbstractIntegrationTest() {
     RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     requestSpecification = new RequestSpecBuilder()
@@ -47,9 +49,10 @@ public void healthy() {
 }
 ```
 
-If we run it, it will fail:
+If we run the test, it will fail:
 
 ```text
+...
 HTTP/1.1 503 Service Unavailable
 transfer-encoding: chunked
 Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
@@ -73,9 +76,9 @@ Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8
         }
     }
 }
-
+... 
 Expected status code <200> but was <503>.
 ```
 
-It seems that it couldn't find Redis and there is no autoconfigurable in-memory option for it.
+It seems that it couldn't find Redis and there is no autoconfigurable option for it.
 

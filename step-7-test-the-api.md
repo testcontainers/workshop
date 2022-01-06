@@ -1,6 +1,6 @@
 # Step 7: Test the API
 
-Now let's create a real test for our API which will verify the business logic.
+Now let's create a test for our API which will verify the business logic.
 
 ```java
 package com.example.demo.api;
@@ -70,9 +70,14 @@ public class RatingsControllerTest extends AbstractIntegrationTest {
 }
 ```
 
-Run it, and it will fail. Why? There is no Kafka!
+Run it, and it will fail.
 
-But running Kafka in Docker is challenging and not as simple as doing `new GenericContainer()`. But don't worry, this time there is `KafkaContainer` from Testcontainers.
+Why?
+
+There is no Kafka!
+
+Running Kafka in Docker is easy with Testcontainers.
+There is a Testcontainers module providing integration with Kafka and the `KafkaContainer` abstraction for your code.
 
 Just add it the same way as you added Redis and set the `spring.kafka.bootstrap-servers` system property.
 
@@ -82,9 +87,9 @@ Some containers expose helper methods. Check if there is one on `KafkaContainer`
 
 ## Hint 2:
 
-You can start a few containers in parallel by doing:
+You can start several containers in parallel by doing:
 
 ```java
-Stream.of(redis, kafka).parallel().forEach(GenericContainer::start);
+  Startables.deepStart(redis, kafka);
 ```
 
