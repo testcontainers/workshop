@@ -14,12 +14,9 @@ Just add the following code to your `AbstractIntegrationTest` with the following
 static final GenericContainer redis = new GenericContainer("redis:6-alpine")
                                             .withExposedPorts(6379);
 
-static {
-  redis.start();
-}
-
 @DynamicPropertySource
 public static void configureRedis(DynamicPropertyRegistry registry) {
+  redis.start();
   registry.add("spring.redis.host", redis::getHost);
   registry.add("spring.redis.port", redis::getFirstMappedPort);
 }
