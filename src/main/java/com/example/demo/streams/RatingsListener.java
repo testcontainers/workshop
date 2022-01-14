@@ -17,6 +17,6 @@ public class RatingsListener {
     public void handle(@Payload Rating rating) {
         System.out.println("Received rating: " + rating);
 
-        ratingsRepository.add(rating.talkId(), rating.value());
+        ratingsRepository.add(rating.getTalkId(), rating.getValue());
     }
 }

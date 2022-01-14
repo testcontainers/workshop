@@ -8,6 +8,12 @@ repositories {
     mavenCentral()
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
 dependencyManagement {
     imports {
         mavenBom 'org.testcontainers:testcontainers-bom:1.16.2'
