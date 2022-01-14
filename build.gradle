@@ -8,18 +8,6 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    acceptanceTest {
-        compileClasspath += main.output + test.output
-        runtimeClasspath += main.output + test.output
-    }
-}
-
-configurations {
-    acceptanceTestImplementation.extendsFrom testImplementation
-    acceptanceTestRuntime.extendsFrom testRuntimeOnly
-}
-
 dependencyManagement {
     imports {
         mavenBom 'org.testcontainers:testcontainers-bom:1.16.2'
@@ -34,8 +22,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.kafka:spring-kafka'
 
-    // so acceptanceTest have them available as well, was not really working with the other scops
-    implementation 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
 
     testRuntimeOnly 'com.h2database:h2'
 
@@ -45,22 +32,7 @@ dependencies {
     testImplementation 'org.testcontainers:kafka'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.awaitility:awaitility:4.1.1'
-
-
-    acceptanceTestImplementation 'org.testcontainers:selenium'
-    acceptanceTestImplementation 'org.seleniumhq.selenium:selenium-java:3.13.0'
 }
-
-task acceptanceTest(type: Test) {
-    testClassesDirs = sourceSets.acceptanceTest.output.classesDirs
-    classpath = sourceSets.acceptanceTest.runtimeClasspath
-    outputs.upToDateWhen { false }
-    useJUnitPlatform()
-}
-
-check.dependsOn acceptanceTest
-
-sourceSets.acceptanceTest.resources.srcDir jar.outputs.files.singleFile.parentFile
 
 test {
     environment "LOG_DATEFORMAT_PATTERN", "HH:mm:ss.SSS"
