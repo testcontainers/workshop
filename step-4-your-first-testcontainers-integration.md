@@ -25,20 +25,17 @@ After adding the properties and run the test again. Fixed? Good!
 Check the logs.
 
 ```text
-                   
-    12:26:58.658  INFO 32972 --- [    Test worker] o.t.d.DockerClientProviderStrategy       : Found Docker environment with Environment variables, system properties and defaults. Resolved dockerHost=tcp://127.0.0.1:56956
-    12:26:58.660  INFO 32972 --- [    Test worker] org.testcontainers.DockerClientFactory   : Docker host IP address is 127.0.0.1
-    12:26:58.784  INFO 32972 --- [    Test worker] org.testcontainers.DockerClientFactory   : Connected to docker:
-      Server Version: 66+testcontainerscloud
-      API Version: 1.41t com.example.demo.DemoApplicationTest
-      Operating System: Ubuntu 20.04.3 LTS
-      Total Memory: 11149 MB
-    12:26:58.790  INFO 32972 --- [    Test worker] o.t.utility.ImageNameSubstitutor         : Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
-    12:26:59.973  INFO 32972 --- [    Test worker] org.testcontainers.DockerClientFactory   : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit :test > 0 tests completed
-    12:26:59.974  INFO 32972 --- [    Test worker] org.testcontainers.DockerClientFactory   : Checking the system...
-    12:26:59.975  INFO 32972 --- [    Test worker] org.testcontainers.DockerClientFactory   : ✔️ Docker server version should be at least 1.6.0
-    12:27:00.244  INFO 32972 --- [    Test worker] org.testcontainers.DockerClientFactory   : ✔️ Docker environment should have more than 2GB free disk space
-
+    13:30:59.352  INFO   --- [    Test worker] o.t.d.DockerClientProviderStrategy       : Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+    13:30:59.369  INFO   --- [    Test worker] org.testcontainers.DockerClientFactory   : Docker host IP address is localhost
+    13:30:59.431  INFO   --- [    Test worker] org.testcontainers.DockerClientFactory   : Connected to docker: 
+      Server Version: 20.10.11
+      API Version: 1.41
+      Operating System: Docker Desktop
+      Total Memory: 3929 MB
+    13:31:03.294  INFO   --- [    Test worker] org.testcontainers.DockerClientFactory   : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+    13:31:03.295  INFO   --- [    Test worker] org.testcontainers.DockerClientFactory   : Checking the system...
+    13:31:03.296  INFO   --- [    Test worker] org.testcontainers.DockerClientFactory   : ✔ Docker server version should be at least 1.6.0
+    13:31:03.588  INFO   --- [    Test worker] org.testcontainers.DockerClientFactory   : ✔ Docker environment should have more than 2GB free disk space
 ```
 
 As you can see, Testcontainers quickly discovered your environment and connected to Docker. 
