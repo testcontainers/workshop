@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS talks(
 
 INSERT
   INTO talks (id, title)
-  VALUES ('welcome-to-junit-5', 'JUnit 5.x actually :)')
+  VALUES ('testcontainers-integration-testing', 'Modern Integration Testing with Testcontainers')
   ON CONFLICT do nothing;
 
 INSERT

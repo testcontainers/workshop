@@ -17,7 +17,7 @@ public class RatingsControllerTest extends AbstractIntegrationTest {
 
     @Test
     public void testRatings() {
-        String talkId = "welcome-to-junit-5";
+        String talkId = "testcontainers-integration-testing";
 
         given(requestSpecification)
                 .body(new Rating(talkId, 5))
