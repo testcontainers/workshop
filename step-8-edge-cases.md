@@ -81,7 +81,11 @@ And there's nothing on your side to fix, the test is pushing the boundaries of R
 But on the bright side we learned how to use Testcontainers outside of the Spring Framework. 
 We also saw how we can utilize to learn about the limitations and behavior of extra components.
 
-Delete the test before anyone notices. Just kidding, let's turn this into a useful test by asserting we get the exceptions.
+Delete the test before anyone notices. 
+Just kidding, let's turn this into a useful test by asserting we throw a custom exception `MaxRatingsAddedException`,
+which indicates that our repository recorded the maximum amount of ratings. 
+In the future we can still make a different decision of how our business logic should deal with this (and if this is even an edge-case worth solving),
+but with this test, we consciously documented our knowledge of the limitations of the systems we integrate against.
 ```java
 @Test
 public void testLimits() {
@@ -93,13 +97,10 @@ public void testLimits() {
     });
 
     assertThat(thrown)
-      .isInstanceOf(RedisSystemException.class)
-      .hasMessageContaining("overflow");
+      .isInstanceOf(MaxRatingsAddedException.class);
 }
 ```
 
-The next step would be to improve the actual repository code to validate the arguments before passing them to Redis, 
-which we leave as the exercise for the reader.
-
+The final exercise is now to adapt the implementation of `RatingsRepository.add()` accordingly, to make the test pass.
 
 
