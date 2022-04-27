@@ -38,7 +38,7 @@ Let's add a `src/test/resources/schema.sql` file with the following content:
 
 ```sql
 CREATE TABLE IF NOT EXISTS talks(
-  id    VARCHAR(50)  NOT NULL,
+  id    VARCHAR(64)  NOT NULL,
   title VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
