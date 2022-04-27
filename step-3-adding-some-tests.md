@@ -58,7 +58,7 @@ Now run the test again. Oh no, it fails!
 
 ```text
 ...
-Caused by: org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO TALKS (ID, TITLE) VALUES ('welcome-to-junit-5', 'JUnit 5.x actually :)') ON[*] CONFLICT DO NOTHING";
+Caused by: org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO TALKS (ID, TITLE) VALUES ('testcontainers-integration-testing', 'Modern Integration Testing with Testcontainers') ON[*] CONFLICT DO NOTHING";
 ...
 ```
 

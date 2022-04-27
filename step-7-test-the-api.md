@@ -7,7 +7,7 @@ package com.example.demo.api;
 
 import com.example.demo.model.Rating;
 import com.example.demo.support.AbstractIntegrationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.awaitility.Awaitility.await;

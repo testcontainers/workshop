@@ -68,7 +68,7 @@ public class RatingsRepositoryTest {
 And the code for initializing the connection factory:
 ```java
 LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(
-        redis.host(),
+        redis.getHost(),
         redis.getFirstMappedPort()
 );
 ```
@@ -92,12 +92,7 @@ public void testLimits() {
     repository.redisTemplate.opsForHash()
         .put(repository.toKey(talkId), "5", Long.MAX_VALUE + "");
 
-    Throwable thrown = catchThrowable(() -> {
-        repository.add(talkId, 5);
-    });
-
-    assertThat(thrown)
-      .isInstanceOf(MaxRatingsAddedException.class);
+        Assertions.assertThrows(MaxRatingsAddedException.class, () ->  repository.add(talkId, 5));
 }
 ```
 
