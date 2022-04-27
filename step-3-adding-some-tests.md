@@ -38,7 +38,7 @@ Let's add a `src/test/resources/schema.sql` file with the following content:
 
 ```sql
 CREATE TABLE IF NOT EXISTS talks(
-  id    VARCHAR(32)  NOT NULL,
+  id    VARCHAR(50)  NOT NULL,
   title VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
@@ -58,7 +58,7 @@ Now run the test again. Oh no, it fails!
 
 ```text
 ...
-Caused by: org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO TALKS (ID, TITLE) VALUES ('welcome-to-junit-5', 'JUnit 5.x actually :)') ON[*] CONFLICT DO NOTHING";
+Caused by: org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO TALKS (ID, TITLE) VALUES ('testcontainers-integration-testing', 'Modern Integration Testing with Testcontainers') ON[*] CONFLICT DO NOTHING";
 ...
 ```
 

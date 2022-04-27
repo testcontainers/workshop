@@ -2,7 +2,7 @@
 
 ## Check Docker
 
-Make sure you have Docker installed on your machine by running the following command:
+Make sure you have Docker available on your machine by running the following command:
 
 ```text
 $ docker version
@@ -43,10 +43,12 @@ With Gradle:
 
 ## \(optionally\) Pull the required images before doing the workshop
 
+This might be helpful if the internet connection at the workshop venue is somewhat slow.
+
 ```text
 docker pull postgres:14-alpine
 docker pull redis:6-alpine
-docker pull eclipse-temurin/17.0.1_12-jre-alpine
+docker pull openjdk:8-jre-alpine
 docker pull confluentinc/cp-kafka:5.4.6
 ```
 
