@@ -9,7 +9,6 @@ Add `com.example.demo.support.AbstractIntegrationTest` class to `src/test/java` 
 It should be an abstract class with standard Spring Boot's testing framework annotations on it:
 
 ```java
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 ```
 
