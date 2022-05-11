@@ -20,7 +20,7 @@ target/
 /_book/
 
 
-/src/test
+#/src/test
 !/src/test/java/com/example/demo/.keep
 !/src/test/resources/logback-test.xml
 /src/acceptanceTest
