@@ -12,15 +12,12 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 import java.util.stream.Stream;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        properties = {
-                "spring.datasource.url=jdbc:tc:postgresql:14-alpine://testcontainers/workshop"
-        }
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AbstractIntegrationTest {
 
     protected RequestSpecification requestSpecification;
@@ -34,13 +31,17 @@ public abstract class AbstractIntegrationTest {
     static final KafkaContainer kafka = new KafkaContainer(
             DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
 
+    static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:14-alpine");
+
     @DynamicPropertySource
     public static void configureRedis(DynamicPropertyRegistry registry) {
-        Stream.of(redis, kafka).parallel().forEach(GenericContainer::start);
+        Stream.of(redis, kafka, postgres).parallel().forEach(GenericContainer::start);
         registry.add("spring.redis.host", redis::getHost);
         registry.add("spring.redis.port", redis::getFirstMappedPort);
         registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
-
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
     }
 
     @BeforeEach

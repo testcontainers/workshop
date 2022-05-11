@@ -11,5 +11,5 @@ VALUES ('testcontainers-integration-testing', 'Modern Integration Testing with T
 
 INSERT
 INTO talks (id, title)
-VALUES ('flight-of-the-flux', 'A look at Reactor execution model')
+VALUES ('Testcontainers is amazing!', 'Testcontainers is amazing!')
     ON CONFLICT do nothing;
