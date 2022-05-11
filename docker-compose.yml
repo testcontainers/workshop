@@ -1,0 +1,34 @@
+version: "2.4"
+services:
+  app:
+    build: .
+    environment:
+      SPRING_REDIS_HOST: "redis"
+      SPRING_REDIS_PORT: "6379"
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka:9093"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/workshop"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "example"
+    ports:
+      - "8080:8080"
+  db:
+    image: "postgres:14-alpine"
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: workshop
+    volumes:
+      - "./src/test/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql"
+  redis:
+    image: "redis:6-alpine"
+  kafka:
+    image: "confluentinc/cp-kafka:5.4.3"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: "1"
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.1.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
