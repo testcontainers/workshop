@@ -50,8 +50,7 @@ public class TestcontainersApplicationTest {
     static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14-alpine")
             .withCopyFileToContainer(MountableFile.forClasspathResource("/schema-compose.sql"), "/docker-entrypoint-initdb.d/")
             .withNetwork(network)
-            .withNetworkAliases("db");;
-
+            .withNetworkAliases("db");
 
     @Container
     static GenericContainer appContainer = new GenericContainer<>(
