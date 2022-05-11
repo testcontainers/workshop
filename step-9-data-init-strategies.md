@@ -70,13 +70,23 @@ or `pom.xml`:
 </dependency>
 ```
 
-Next, move all the `INSERT ...` statements from the `talks-schema.sql` to `src/main/resources/migrations/V1_1__talks.sql` files.
+Next, move all the `INSERT ...` statements from the `talks-schema.sql` to `src/main/resources/db/migration/V1_1__talks.sql` files.
 
-Tune the `@SpringBootTest` to make it Flyway aware:
+### Hint
+
+For Flyway not to complain that it can't store its data in the DB, we need to configure it to create the missing bits.
+This can be done either in `application.yml` with:
+
+```yaml
+  flyway:
+    baseline-on-migrate: true
+```
+
+or by tuning the `@SpringBootTest`:
+
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
-                "spring.flyway.locations=classpath:/migrations",
                 "spring.flyway.baselineOnMigrate=true",
         }
 )

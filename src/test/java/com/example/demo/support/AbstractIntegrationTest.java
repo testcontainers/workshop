@@ -18,12 +18,7 @@ import org.testcontainers.utility.MountableFile;
 
 import java.util.stream.Stream;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        properties = {
-                "spring.flyway.locations=classpath:migrations",
-                "spring.flyway.baselineOnMigrate=true",
-        }
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public abstract class AbstractIntegrationTest {
 
     protected RequestSpecification requestSpecification;
