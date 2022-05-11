@@ -12,6 +12,9 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  flyway:
+    baseline-on-migrate: true
+    locations: classpath:migrations
 
   output:
     ansi:

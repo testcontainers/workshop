@@ -3,11 +3,11 @@ package com.example.demo;
 import com.example.demo.repository.TalksRepository;
 import com.example.demo.support.AbstractIntegrationTest;
 import io.restassured.filter.log.LogDetail;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static io.restassured.RestAssured.given;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class DemoApplicationTest extends AbstractIntegrationTest {
 
@@ -16,8 +16,9 @@ public class DemoApplicationTest extends AbstractIntegrationTest {
 
     @Test
     public void contextLoads() {
+        Assertions.assertTrue(talks.exists("testcontainers-integration-testing"));
+        Assertions.assertTrue(talks.exists("flight-of-the-flux"));
 
-        assertThat(talks.exists("Testcontainers is amazing!")).isTrue();
     }
     @Test
     public void healthy() {

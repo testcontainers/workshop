@@ -19,10 +19,11 @@ import org.testcontainers.utility.MountableFile;
 import java.util.stream.Stream;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-properties = {
-        "spring.flyway.locations=classpath:/migrations",
-        "spring.flyway.baselineOnMigrate=true",
-})
+        properties = {
+                "spring.flyway.locations=classpath:migrations",
+                "spring.flyway.baselineOnMigrate=true",
+        }
+)
 public abstract class AbstractIntegrationTest {
 
     protected RequestSpecification requestSpecification;
@@ -37,7 +38,7 @@ public abstract class AbstractIntegrationTest {
             DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
 
     static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14-alpine")
-            .withCopyFileToContainer(MountableFile.forClasspathResource("/schema.sql"), "/docker-entrypoint-initdb.d/");
+            .withCopyFileToContainer(MountableFile.forClasspathResource("/talks-schema.sql"), "/docker-entrypoint-initdb.d/");
 
     @DynamicPropertySource
     public static void configureRedis(DynamicPropertyRegistry registry) {
@@ -48,7 +49,7 @@ public abstract class AbstractIntegrationTest {
         registry.add("spring.datasource.url", postgres::getJdbcUrl);
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
-        registry.add("spring.datasource.initialization-mode", () -> "never");
+//        registry.add("spring.datasource.initialization-mode", () -> "never");
     }
 
     @BeforeEach
