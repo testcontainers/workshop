@@ -14,6 +14,7 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.utility.MountableFile;
 
 import java.util.stream.Stream;
 
@@ -31,7 +32,8 @@ public abstract class AbstractIntegrationTest {
     static final KafkaContainer kafka = new KafkaContainer(
             DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
 
-    static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:14-alpine");
+    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14-alpine")
+            .withCopyFileToContainer(MountableFile.forClasspathResource("/schema.sql"), "/docker-entrypoint-initdb.d/");
 
     @DynamicPropertySource
     public static void configureRedis(DynamicPropertyRegistry registry) {
@@ -42,6 +44,7 @@ public abstract class AbstractIntegrationTest {
         registry.add("spring.datasource.url", postgres::getJdbcUrl);
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
+        registry.add("spring.datasource.initialization-mode", () -> "never");
     }
 
     @BeforeEach
