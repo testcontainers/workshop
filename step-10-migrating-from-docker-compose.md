@@ -1,15 +1,14 @@
 # Step 10: Migrating from Docker Compose
 
-But we don't always encounter green field projects.
-Maybe you are already invested some time in using Docker Compose to spin up your test environment 
-and are wondering how to get started from here?
+We don't always encounter green field projects.
+Maybe you are already invested some time in using Docker Compose to spin up your test environment and are wondering how to get started from here?
 
-So let's look into how Testcontainers can support you on this journey.
+Let's look into how Testcontainers can support you on this journey.
 
 ## `Dockerfile` and `docker-compose.yml`
 
 Let's assume we did start out with running our application as a Docker container as well, 
-using the following Dockerfile:
+using the following, pretty standard, Dockerfile:
 
 ```Dockerfile
 FROM openjdk:8-jre-alpine
@@ -26,8 +25,7 @@ We also need to make sure the Spring-Boot jar has been built:
 ./gradlew bootJar
 ```
 
-And we have Docker Compose file, that automatically builds this image and spins it up,
-together with all dependencies:
+Finally, we have a Docker Compose file, that automatically builds the app image and spins it up, together with all dependencies:
 
 ```yaml
 version: "2.4"
@@ -181,10 +179,10 @@ static DockerComposeContainer composeContainer = new DockerComposeContainer(new 
         .waitingFor("app_1", Wait.forHttp("/actuator/health"));
 ```
 
-You also need to add the `@Testcontainers` annotation to the test class, if you want the Testcontainers-JUnit-Jupiter extension
+You also need to add the `@Testcontainers` annotation to the test class, if you want the [Testcontainers-JUnit-Jupiter extension](https://www.testcontainers.org/test_framework_integration/junit_5/)
 to manage the container lifecycle (similar to how we did in step 8).
 
-Also, make sure to configure RestAssured to access the dynamic port exposed by Testcontainers:
+Finally, make sure to configure RestAssured to access the dynamic port exposed by Testcontainers:
 
 ```java
 requestSpecification = new RequestSpecBuilder()
