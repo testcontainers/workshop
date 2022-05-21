@@ -47,7 +47,7 @@ Make the database initialization work again (and the test pass) by initializing 
 
 ### Hint
 Most database containers have functionality to initialize the Database from the script files provided in the container.  
-The PostgreSQL container happens to run all SQL files from `/docker-entrypoint-initdb.d` directory, as described in the _Initialization scripts_  chapter of the [Postgres container](https://hub.docker.com/_/postgres/) docs.
+The PostgreSQL container happens to run all SQL files from `/docker-entrypoint-initdb.d/` directory, as described in the _Initialization scripts_  chapter of the [Postgres container](https://hub.docker.com/_/postgres/) docs.
 
 Configure the `postgres` object using the `withCopyToContainer` method and `MountableFile.forClasspathResource(String path)` to configure the database schema.
 After you initialize the DB correctly, the test should work again (despite _not_ having the `schema.sql` file).
@@ -77,21 +77,11 @@ Note that the migrations file is not on the **test** classpath, as Flyway is lik
 
 For Flyway not to complain that it can't store its data in the DB, we need to configure it to create its missing database management tables and data.
 
-This can be done either in `application.yml` with:
+This can be done in `application.yml` with:
 
 ```yaml
   flyway:
     baseline-on-migrate: true
-```
-
-or by tuning the `@SpringBootTest`:
-
-```java
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        properties = {
-                "spring.flyway.baselineOnMigrate=true",
-        }
-)
 ```
 
 Note that `spring.flyway.locations=classpath:db/migration` is the default location for the migration files used by Flyway so we don't need to configure that explicitly. 
