@@ -71,7 +71,7 @@ or `pom.xml`:
 </dependency>
 ```
 
-Next, move all the `INSERT ...` statements from the `talks-schema.sql` to `src/main/resources/db/migration/V1_1__talks.sql` file.
+Next, move all the `INSERT ...` statements from the `talks-schema.sql` to `src/main/resources/db/migration/V1_1__talks.sql1` file.
 
 Note that the migrations file is not on the **test** classpath, as Flyway is likely to be used for production schema management as well. 
 

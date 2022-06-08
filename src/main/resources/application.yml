@@ -1,8 +1,10 @@
 management.endpoint.health.show-details: always
 
+flyway:
+  baseline-on-migrate: true
+  baselineOnMigrate: true
+
 spring:
-  datasource:
-    initialization-mode: always
   kafka:
     listener:
       missingTopicsFatal: false
@@ -16,3 +18,42 @@ spring:
   output:
     ansi:
       enabled: always
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          devtools:
+            restart: DEBUG
+
+management:
+  info:
+    env:
+      enabled: true
+    git:
+      enabled: true
+    java:
+      enabled: true
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+      discovery:
+        enabled: true
+
+
+testcontainers:
+  postgresql:
+    enabled: true
+    image: postgres:14-alpine
+  kafka:
+    enabled: true
+    image: confluentinc/cp-kafka:5.4.6
+  redis:
+    enabled: true
+    image: redis:6-alpine
