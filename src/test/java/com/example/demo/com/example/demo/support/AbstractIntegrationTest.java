@@ -37,8 +37,10 @@ import java.io.IOException;
 )
 public class AbstractIntegrationTest {
 
+  static Network network = Network.newNetwork();
+
   static GenericContainer<?> redis = new GenericContainer<>("redis:6-alpine")
-    .withExposedPorts(6379);
+    .withExposedPorts(6379).withNetwork(network).withNetworkAliases("redis");
 
   static PostgreSQLContainer<?> postgreSQLContainer =
     new PostgreSQLContainer<>("postgres:14-alpine");
@@ -47,14 +49,14 @@ public class AbstractIntegrationTest {
     DockerImageName.parse("confluentinc/cp-kafka:5.4.6"));
 
   static ToxiproxyContainer toxyproxy = new ToxiproxyContainer(
-    DockerImageName.parse("shopify/toxyproxy:2.1.0"));
+    DockerImageName.parse("shopify/toxiproxy:2.4.0")).withNetwork(network);
 
   @DynamicPropertySource
   public static void setupThings(DynamicPropertyRegistry registry) throws IOException {
     Startables.deepStart(redis, kafka, postgreSQLContainer, toxyproxy).join();
 
     ToxiproxyContainer.ContainerProxy proxy = toxyproxy.getProxy(redis, 6379);
-    proxy.toxics().latency("make it slooooow", ToxicDirection.DOWNSTREAM, 5000).setJitter(200);
+    proxy.toxics().latency("latency", ToxicDirection.DOWNSTREAM, 2000).setJitter(200);
 
     registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
     registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
@@ -64,11 +66,12 @@ public class AbstractIntegrationTest {
     registry.add("spring.redis.port", proxy::getProxyPort);
 
     registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
+
+    createProxy();
   }
 
   static  TcpProxy tcpProxy;
 
-  @BeforeAll
   public static void createProxy() {
     StaticTcpProxyConfig config = new StaticTcpProxyConfig(
       5900,
