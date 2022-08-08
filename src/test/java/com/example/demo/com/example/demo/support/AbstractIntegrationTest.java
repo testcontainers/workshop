@@ -49,7 +49,7 @@ public class AbstractIntegrationTest {
     DockerImageName.parse("confluentinc/cp-kafka:5.4.6"));
 
   static ToxiproxyContainer toxyproxy = new ToxiproxyContainer(
-    DockerImageName.parse("shopify/toxiproxy:2.4.0")).withNetwork(network);
+    DockerImageName.parse("shopify/toxiproxy:2.1.0")).withNetwork(network);
 
   @DynamicPropertySource
   public static void setupThings(DynamicPropertyRegistry registry) throws IOException {
