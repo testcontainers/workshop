@@ -1,5 +1,8 @@
 package com.example.demo.com.example.demo.support;
 
+import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.async.ResultCallback;
+import com.github.dockerjava.api.model.PushResponseItem;
 import com.github.terma.javaniotcpproxy.StaticTcpProxyConfig;
 import com.github.terma.javaniotcpproxy.TcpProxy;
 import eu.rekawek.toxiproxy.model.ToxicDirection;
@@ -7,6 +10,7 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import net.bytebuddy.description.type.TypeList;
+import org.checkerframework.checker.units.qual.K;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +21,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.*;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.lifecycle.Startables;
 import org.testcontainers.utility.DockerImageName;
 import org.testcontainers.utility.MountableFile;
@@ -27,65 +33,57 @@ import java.io.IOException;
   webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
   properties = {
 
-//    "spring.datasource.url=jdbc:tc:postgresql:14-alpine:///"
   }
 )
 public class AbstractIntegrationTest {
 
-  static Network network = Network.newNetwork();
+  static GenericContainer<?> redis = new GenericContainer<>("redis:6-alpine")
+    .withExposedPorts(6379);
 
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
-    "postgres:14-alpine").withReuse(true);
-//    .withCopyFileToContainer(MountableFile.forClasspathResource(
-//      "/schema.sql"), "/docker-entrypoint-initdb.d/"
-//    );
+  static PostgreSQLContainer<?> postgreSQLContainer =
+    new PostgreSQLContainer<>("postgres:14-alpine");
 
-  static GenericContainer redis = new GenericContainer("redis:6-alpine")
-    .withExposedPorts(6379).withReuse(true).withNetwork(network).withNetworkAliases("redis");
+  static KafkaContainer kafka = new KafkaContainer(
+    DockerImageName.parse("confluentinc/cp-kafka:5.4.6"));
 
-  static ToxiproxyContainer toxiproxy =
-    new ToxiproxyContainer("shopify/toxiproxy:2.1.0").withNetwork(network)
-      .withNetworkAliases("toxiproxy");
-
-  static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse(
-    "confluentinc/cp-kafka:5.4.6"
-  )).withReuse(true);
-
-  static TcpProxy tcpProxy;
-
-
-  @AfterAll
-  public static void stopProxy() {
-    tcpProxy.shutdown();
-  }
-
+  static ToxiproxyContainer toxyproxy = new ToxiproxyContainer(
+    DockerImageName.parse("shopify/toxyproxy:2.1.0"));
 
   @DynamicPropertySource
   public static void setupThings(DynamicPropertyRegistry registry) throws IOException {
-    Startables.deepStart(redis, kafka, postgres, toxiproxy).join();
+    Startables.deepStart(redis, kafka, postgreSQLContainer, toxyproxy).join();
 
-    ToxiproxyContainer.ContainerProxy myRedis = toxiproxy.getProxy("redis", 6379);
+    ToxiproxyContainer.ContainerProxy proxy = toxyproxy.getProxy(redis, 6379);
+    proxy.toxics().latency("make it slooooow", ToxicDirection.DOWNSTREAM, 5000).setJitter(200);
 
-    registry.add("spring.redis.host", myRedis::getContainerIpAddress);
-    registry.add("spring.redis.port", myRedis::getProxyPort);
+    registry.add("spring.datasource.url", postgreSQLContainer::getJdbcUrl);
+    registry.add("spring.datasource.username", postgreSQLContainer::getUsername);
+    registry.add("spring.datasource.password", postgreSQLContainer::getPassword);
 
-//    myRedis.toxics().latency("slowdown", ToxicDirection.DOWNSTREAM, 1000).setJitter(400);
+    registry.add("spring.redis.host", proxy::getContainerIpAddress);
+    registry.add("spring.redis.port", proxy::getProxyPort);
 
     registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
-    registry.add("spring.datasource.url", postgres::getJdbcUrl);
-    registry.add("spring.datasource.username", postgres::getUsername);
-    registry.add("spring.datasource.password", postgres::getPassword);
+  }
 
+  static  TcpProxy tcpProxy;
+
+  @BeforeAll
+  public static void createProxy() {
     StaticTcpProxyConfig config = new StaticTcpProxyConfig(
       5900,
-      postgres.getHost(),
-      postgres.getFirstMappedPort()
+      postgreSQLContainer.getHost(),
+      postgreSQLContainer.getFirstMappedPort()
     );
     config.setWorkerCount(1);
     tcpProxy = new TcpProxy(config);
     tcpProxy.start();
   }
 
+  @AfterAll
+  public static void stopProxy() {
+    tcpProxy.shutdown();
+  }
 
   protected RequestSpecification requestSpecification;
 
@@ -103,5 +101,6 @@ public class AbstractIntegrationTest {
       )
       .build();
   }
+
 
 }
