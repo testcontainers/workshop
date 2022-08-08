@@ -20,7 +20,7 @@ spring:
       enabled: always
   sql:
     init:
-      mode: never
+      mode: always
 
 logging:
   level:
@@ -47,13 +47,13 @@ management:
         enabled: true
 
 
-testcontainers:
-  postgresql:
-    enabled: true
-    image: postgres:14-alpine
-  kafka:
-    enabled: true
-    image: confluentinc/cp-kafka:5.4.6
-  redis:
-    enabled: true
-    image: redis:6-alpine
+#testcontainers:
+#  postgresql:
+#    enabled: true
+#    image: postgres:14-alpine
+#  kafka:
+#    enabled: true
+#    image: confluentinc/cp-kafka:5.4.6
+#  redis:
+#    enabled: true
+#    image: redis:6-alpine
