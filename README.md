@@ -1,3 +1,5 @@
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=master&repo=140400673&machine=standardLinux32gb&location=WestEurope)
+
 # Introduction
 
 This workshop will explain how to use Testcontainers \( [https://www.testcontainers.org](https://www.testcontainers.org) \) in your Java applications.
