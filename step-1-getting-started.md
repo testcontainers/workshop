@@ -49,7 +49,7 @@ This might be helpful if the internet connection at the workshop venue is somewh
 docker pull postgres:14-alpine
 docker pull redis:6-alpine
 docker pull openjdk:8-jre-alpine
-docker pull confluentinc/cp-kafka:5.4.6
+docker pull confluentinc/cp-kafka:6.2.1
 ```
 
 

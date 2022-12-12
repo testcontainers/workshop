@@ -51,7 +51,7 @@ services:
   redis:
     image: "redis:6-alpine"
   kafka:
-    image: "confluentinc/cp-kafka:5.4.3"
+    image: "confluentinc/cp-kafka:6.2.1"
     environment:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
@@ -214,7 +214,7 @@ static final GenericContainer redis = new GenericContainer("redis:6-alpine")
 
 @Container
 static final KafkaContainer kafka = new KafkaContainer (
-        DockerImageName.parse("confluentinc/cp-kafka:5.4.3"))
+        DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
         .withNetwork(network)
         .withNetworkAliases("kafka");
 
