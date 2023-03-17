@@ -186,7 +186,7 @@ Finally, make sure to configure RestAssured to access the dynamic port exposed b
 
 ```java
 requestSpecification = new RequestSpecBuilder()
-    .setBaseUri(String.format("http://%s:%d", composeContainer.getHost(), composeContainer.getServicePort("app_1", 8080)))
+    .setBaseUri(String.format("http://%s:%d", composeContainer.getServiceHost("app_1", 8080), composeContainer.getServicePort("app_1", 8080)))
     .addHeader(
             HttpHeaders.CONTENT_TYPE,
             MediaType.APPLICATION_JSON_VALUE
