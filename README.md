@@ -18,5 +18,5 @@ This workshop will explain how to use Testcontainers \( [https://www.testcontain
 * [Step 9: Data initialization strategies](step-9-data-init-strategies.md)
 * [Step 10: Migrating from Docker Compose](step-10-migrating-from-docker-compose.md)
 * [Step 11: Chaos Engineering](step-11-chaos-engineering.md)
-* [Step 12: Custom Modules](step-12-custom-modules.md)A
+* [Step 12: Custom Modules](step-12-custom-modules.md)
 
