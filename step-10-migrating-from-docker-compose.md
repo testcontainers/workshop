@@ -47,7 +47,7 @@ services:
       POSTGRES_PASSWORD: example
       POSTGRES_DB: workshop
     volumes:
-      - "./src/test/resources/talks-schema.sql:/docker-entrypoint-initdb.d/schema.sql"
+      - "./src/main/resources/db/migration/V1_1__talks.sql:/docker-entrypoint-initdb.d/schema.sql"
   redis:
     image: "redis:6-alpine"
   kafka:
