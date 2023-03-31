@@ -22,7 +22,7 @@ We'll use a [Context Initializer](https://docs.spring.io/spring-framework/docs/c
 Create a class `LocalEnvironmentInitializer` in the Test classpath that will implement the context initializer:
 
 ```java
-static class LocalEnvironmentInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+class LocalEnvironmentInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
   
     @Override
     public void initialize(ConfigurableApplicationContext context) {
