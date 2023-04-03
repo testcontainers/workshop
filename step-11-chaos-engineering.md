@@ -16,7 +16,3 @@ Check out the documentation and write a test that checks the following test scen
 ## Hint
 
 You need to add the Toxiproxy module to your project's dependencies.
-You also need a Toxiproxy client, such as:
-```groovy
-testImplementation("eu.rekawek.toxiproxy:toxiproxy-java:2.1.7")
-```
