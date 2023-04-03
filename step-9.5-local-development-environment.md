@@ -41,27 +41,24 @@ The general structure of the `initialize` method could look like this:
 ```java
 @Override
 public void initialize(ConfigurableApplicationContext context) {
-  var env = context.getEnvironment();
-  env.getPropertySources().addFirst(new MapPropertySource(
-      "testcontainers",
-      (Map) getProperties()
-  ));
+    ConfigurableEnvironment env = context.getEnvironment();
+    env.getPropertySources().addFirst(new MapPropertySource("testcontainers", getProperties()));
 }
 ```
 
 Where `getProperties` returns a `Map` with the details of how to connect to our ephemeral services:
 
 ```java
-Map.of(
-    "spring.datasource.url", postgres.getJdbcUrl(),
-    "spring.datasource.username", postgres.getUsername(),
-    "spring.datasource.password", postgres.getPassword(),
-
-    "spring.redis.host", redis.getContainerIpAddress(),
-    "spring.redis.port", redis.getFirstMappedPort() + "",
-
-    "spring.kafka.bootstrap-servers", kafka.getBootstrapServers()
-);
+Map<String, Object> getProperties() {
+    Map<String, Object> props = new HashMap<>();
+    props.put("spring.datasource.url", postgres.getJdbcUrl());
+    props.put("spring.datasource.username", postgres.getUsername());
+    props.put("spring.datasource.password", postgres.getPassword());
+    props.put("spring.redis.host", redis.getHost());
+    props.put("spring.redis.port", redis.getFirstMappedPort());
+    props.put("spring.kafka.bootstrap-servers", kafka.getBootstrapServers());
+    return props;
+    }
 ```
 
 ## Running tests with the Context Initializer approach
@@ -102,7 +99,15 @@ Running this class should run, and you should see from the logs that the applica
 Stopping the application will remove the containers just like Testcontainers cleans up the environment after running the tests.
 
 
-## Hint 1:
+## Hint 1
+Don't forget to start the containers after moving them from `AbstractIntegrationTest`.
+
+## Hint 2
+
+If you see `Found multiple @SpringBootConfiguration annotated classes`, this means `@SpringBootTest` cannot select the application automatically (because there are two now), hence `@SpringBootTest(... , classes = DemoApplication.class)` might be handy.
+
+
+## Hint 3:
 One way to make the current setup more flexible is to make container creation and configuring the app conditional on not having the service defined in the existing application configuration.
 For example, something like:
 ```
@@ -110,6 +115,6 @@ if(getProperty("spring.datasource.url") != null)
 ```
 can be used to conditionally create an ephemeral database with Testcontainers.
 
-## Hint 2:
+## Hint 4:
 Local development environments can experience a lot of start/stop cycles: for example, when you change a line of code and want to see it in action.
 Try the [Reusable containers mode](https://www.testcontainers.org/features/reuse/) to avoid stopping the containers on application stop and speeding up application starts. 
