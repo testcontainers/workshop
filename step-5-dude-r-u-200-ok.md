@@ -1,4 +1,4 @@
-# Step 5: Dude, r u 200 OK?
+# Step 5: Hello, r u 200 OK?
 
 One of the great features of Spring Boot is the Actuator and its health endpoint. 
 It gives you an overview how healthy your app is.

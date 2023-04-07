@@ -47,11 +47,11 @@ services:
       POSTGRES_PASSWORD: example
       POSTGRES_DB: workshop
     volumes:
-      - "./src/test/resources/talks-schema.sql:/docker-entrypoint-initdb.d/schema.sql"
+      - "./src/main/resources/db/migration/V1_1__talks.sql:/docker-entrypoint-initdb.d/schema.sql"
   redis:
     image: "redis:6-alpine"
   kafka:
-    image: "confluentinc/cp-kafka:5.4.3"
+    image: "confluentinc/cp-kafka:6.2.1"
     environment:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
@@ -186,7 +186,7 @@ Finally, make sure to configure RestAssured to access the dynamic port exposed b
 
 ```java
 requestSpecification = new RequestSpecBuilder()
-    .setBaseUri(String.format("http://%s:%d", composeContainer.getHost(), composeContainer.getServicePort("app_1", 8080)))
+    .setBaseUri(String.format("http://%s:%d", composeContainer.getServiceHost("app_1", 8080), composeContainer.getServicePort("app_1", 8080)))
     .addHeader(
             HttpHeaders.CONTENT_TYPE,
             MediaType.APPLICATION_JSON_VALUE
@@ -214,7 +214,7 @@ static final GenericContainer redis = new GenericContainer("redis:6-alpine")
 
 @Container
 static final KafkaContainer kafka = new KafkaContainer (
-        DockerImageName.parse("confluentinc/cp-kafka:5.4.3"))
+        DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
         .withNetwork(network)
         .withNetworkAliases("kafka");
 
