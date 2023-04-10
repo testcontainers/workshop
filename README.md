@@ -14,7 +14,8 @@ This workshop will explain how to use Testcontainers \( [https://www.testcontain
 * [Step 5: Hello, r u 200 OK?](step-5-dude-r-u-200-ok.md)
 * [Step 6: Adding Redis](step-6-adding-redis.md)
 * [Step 7: Test the API](step-7-test-the-api.md)
-  Extra steps for curious ones:
+
+Extra steps for curious ones:
 * [Edge cases](step-extra-edge-cases.md)
 * [Data initialization strategies](step-extra-data-init-strategies.md)
 * [Migrating from Docker Compose](step-extra-migrating-from-docker-compose.md)
