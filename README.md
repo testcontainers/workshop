@@ -2,7 +2,7 @@
 
 # Introduction
 
-This workshop will explain how to use Testcontainers \( [https://www.testcontainers.org](https://www.testcontainers.org) \) in your Java applications.
+This workshop will explain how to use Testcontainers for Java \([https://www.testcontainers.org](https://www.testcontainers.org)\) in your Java applications.
 
 ## Table of contents
 
@@ -21,4 +21,5 @@ Next steps which you can do in any order based on the interest:
 * [Migrating from Docker Compose](step-extra-migrating-from-docker-compose.md)
 * [Chaos Engineering](step-extra-chaos-engineering.md)
 * [Custom Modules](step-extra-custom-modules.md)
+* [Local Development Environment with Testcontainers](step-extra-local-development-environment.md)
 
