@@ -94,4 +94,4 @@ Stream.of(redis, kafka).parallel().forEach(GenericContainer::start);
 ```
 
 ### 
-[Next]((step-7.7-data-init-strategies.md))
+[Next](step-7.7-data-init-strategies.md)
