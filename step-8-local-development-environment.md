@@ -8,7 +8,7 @@ Some application frameworks integrate with Testcontainers to provide this functi
 
 * Quarkus has [Dev Services](https://quarkus.io/guides/dev-services).
 * Micronaut has [Test Resources](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/).
-* Spring Boot [can be configured too](https://docs.spring.io/spring-boot/docs/3.1.0-SNAPSHOT/reference/html/features.html#features.testing.testcontainers.at-development-time).
+* Spring Boot [can be configured too](https://docs.spring.io/spring-boot/docs/3.1.0/reference/html/features.html#features.testing.testcontainers.at-development-time).
 
 In this chapter we'll configure our Spring Boot application to use Testcontainers at Development Time. 
 
