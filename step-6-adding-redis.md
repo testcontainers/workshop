@@ -26,3 +26,5 @@ Simple and beautiful, huh?
 
 Run the tests, now they should all pass.
 
+### 
+[Next](step-7-test-the-api.md)

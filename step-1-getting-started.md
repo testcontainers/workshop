@@ -1,9 +1,16 @@
 # Step 1: Getting Started
 
+## Check Java
+You'll need Java 17 or newer for this workshop. 
+Testcontainers libraries are compatible with Java 8+, but this workshop uses a Spring Boot 3.1 application which requires Java 17 or newer.
+
 ## Check Docker
 
-Make sure you have Docker available on your machine by running the following command:
+Make sure you have a Docker environment available on your machine. 
 
+* It can be [Testcontainers Cloud](https://testcontainers.com/cloud) recommended to avoid straining the conference network by pulling heavy Docker images. 
+
+* It can be local Docker, which you can check by running: 
 ```text
 $ docker version
 
@@ -35,10 +42,9 @@ Clone the following project from GitHub to your computer:
 
 ## Build the project to download the dependencies
 
-With Gradle:
+With Maven:
 ```text
-# -x check - skips the tests
-./gradlew build -x check
+./mvnw verify
 ```
 
 ## \(optionally\) Pull the required images before doing the workshop
@@ -51,5 +57,8 @@ docker pull redis:6-alpine
 docker pull openjdk:8-jre-alpine
 docker pull confluentinc/cp-kafka:6.2.1
 ```
+
+### 
+[Next](step-2-exploring-the-app.md)
 
 

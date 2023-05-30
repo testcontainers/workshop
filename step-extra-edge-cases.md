@@ -1,4 +1,4 @@
-# Step 8: Using Testcontainers without frameworks' support
+# Step 8.8: Using Testcontainers without frameworks' support
 
 Redis has its own limits. 
 Are there any limits of Hash's increment? 

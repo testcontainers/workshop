@@ -14,12 +14,13 @@ This workshop will explain how to use Testcontainers for Java \([https://www.tes
 * [Step 5: Hello, r u 200 OK?](step-5-dude-r-u-200-ok.md)
 * [Step 6: Adding Redis](step-6-adding-redis.md)
 * [Step 7: Test the API](step-7-test-the-api.md)
+* [Step 8: Local Development Environment with Testcontainers](step-8-local-development-environment.md)
 
 Next steps which you can do in any order based on the interest:
 * [Edge cases](step-extra-edge-cases.md)
-* [Data initialization strategies](step-extra-data-init-strategies.md)
+* [Data initialization strategies](step-7.7-data-init-strategies.md)
 * [Migrating from Docker Compose](step-extra-migrating-from-docker-compose.md)
 * [Chaos Engineering](step-extra-chaos-engineering.md)
 * [Custom Modules](step-extra-custom-modules.md)
-* [Local Development Environment with Testcontainers](step-extra-local-development-environment.md)
+
 

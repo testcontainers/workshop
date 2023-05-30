@@ -82,3 +82,5 @@ Expected status code <200> but was <503>.
 
 It seems that it couldn't find Redis and there is no autoconfigurable option for it.
 
+### 
+[Next](step-6-adding-redis.md)

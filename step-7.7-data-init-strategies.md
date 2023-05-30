@@ -1,4 +1,4 @@
-# Step 9: Data initialization strategies
+# Step 7.7: Data initialization strategies
 
 Initializing data using Spring is neat, but sometimes you might need alternative solutions. 
 
@@ -88,3 +88,6 @@ Note that `spring.flyway.locations=classpath:db/migration` is the default locati
 For more details on Spring Boot and Flyway integration please refer to [Spring manual](https://docs.spring.io/spring-boot/docs/2.6.7/reference/htmlsingle/#howto.data-initialization.migration-tool.flyway).
 
 The test verifying that the data is correctly initialized in the Database should pass after we configure Flyway to run the migrations correctly.
+
+### 
+[Next](step-8-local-development-environment.md)

@@ -93,3 +93,5 @@ You can start several containers in parallel by doing:
 Stream.of(redis, kafka).parallel().forEach(GenericContainer::start);
 ```
 
+### 
+[Next]((step-7.7-data-init-strategies.md))

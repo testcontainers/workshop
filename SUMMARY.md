@@ -11,7 +11,7 @@
 * 
 Extra steps for curious ones:
 * [Edge cases](step-extra-edge-cases.md)
-* [Data initialization strategies](step-extra-data-init-strategies.md)
+* [Data initialization strategies](step-7.7-data-init-strategies.md)
 * [Migrating from Docker Compose](step-extra-migrating-from-docker-compose.md)
 * [Chaos Engineering](step-extra-chaos-engineering.md)
 * [Custom Modules](step-extra-custom-modules.md)

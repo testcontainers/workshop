@@ -31,3 +31,5 @@ The API is a Spring Web REST controller \(`com.example.demo.api.RatingsControlle
 * `POST /ratings { "talkId": ?, "value": 1-5 }` to add a rating for a talk
 * `GET /ratings?talkId=?` to get the histogram of ratings of the given talk
 
+### 
+[Next](step-3-adding-some-tests.md)
