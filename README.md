@@ -2,7 +2,9 @@
 
 # Introduction
 
-This workshop will explain how to use Testcontainers for Java \([https://www.testcontainers.org](https://www.testcontainers.org)\) in your Java applications.
+This workshop will explain how to use Testcontainers \([https://www.testcontainers.com](https://www.testcontainers.com)\) in your Java applications.
+
+We'll build a sample Spring Boot application, add tests to it, and explore Testcontainers for Java API you need to know to be effective with your tests. 
 
 ## Table of contents
 
