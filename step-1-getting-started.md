@@ -13,9 +13,10 @@ You can download the app from [https://testcontainers.com/desktop/](https://test
 To use Testcontainers, you need to have a supported Docker environment.
 If you have the Testcontainers Desktop application installed, it will show you the available container runtimes on your machine.
 
-* You can choose any of the installed container runtimes like **Docker Desktop**, **OrbStack**, **Rancher Desktop**, **Podman**, etc.
+* You can choose any of the installed container runtimes like **Docker Desktop**, **OrbStack**, **Rancher Desktop**, etc.
 * It can be [Testcontainers Cloud](https://testcontainers.com/cloud) recommended to avoid straining the conference network by pulling heavy Docker images. 
 * If you don't have any container runtimes installed on your machine, you can also use the **Embedded Runtime** provided by Testcontainers Desktop.
+  To use the Embedded Runtime, you need to add the property `embedded.runtime.enabled=true` to your **$HOME/.testcontainers.properties** file.
 
 You can check the Docker availability by running: 
 ```text
