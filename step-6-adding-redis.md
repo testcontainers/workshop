@@ -11,7 +11,7 @@ Luckily, there are the `.start()`/`.stop()` methods of `GenericContainer` to sta
 Just add the following code to your `AbstractIntegrationTest` with the following code:
 
 ```java
-static final GenericContainer redis = new GenericContainer("redis:6-alpine")
+static final GenericContainer redis = new GenericContainer("redis:7-alpine")
                                             .withExposedPorts(6379);
 
 @DynamicPropertySource

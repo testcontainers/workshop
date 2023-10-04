@@ -42,23 +42,23 @@ services:
     ports:
       - "8080:8080"
   db:
-    image: "postgres:14-alpine"
+    image: "postgres:16-alpine"
     environment:
       POSTGRES_PASSWORD: example
       POSTGRES_DB: workshop
     volumes:
       - "./src/main/resources/db/migration/V1_1__talks.sql:/docker-entrypoint-initdb.d/schema.sql"
   redis:
-    image: "redis:6-alpine"
+    image: "redis:7-alpine"
   kafka:
-    image: "confluentinc/cp-kafka:6.2.1"
+    image: "confluentinc/cp-kafka:7.5.0"
     environment:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
       KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: "1"
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.1.1
+    image: confluentinc/cp-zookeeper:7.5.0
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -207,20 +207,20 @@ Docker DNS features.
 static Network network = Network.newNetwork();
 
 @Container
-static final GenericContainer redis = new GenericContainer("redis:6-alpine")
+static final GenericContainer redis = new GenericContainer("redis:7-alpine")
         .withExposedPorts(6379)
         .withNetwork(network)
         .withNetworkAliases("redis");
 
 @Container
 static final KafkaContainer kafka = new KafkaContainer (
-        DockerImageName.parse("confluentinc/cp-kafka:6.2.1"))
+        DockerImageName.parse("confluentinc/cp-kafka:7.5.0"))
         .withNetwork(network)
         .withNetworkAliases("kafka");
 
 
 @Container
-static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14-alpine")
+static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
         .withCopyFileToContainer(MountableFile.forClasspathResource("/talks-schema.sql"), "/docker-entrypoint-initdb.d/")
         .withNetwork(network)
         .withNetworkAliases("db");

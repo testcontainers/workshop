@@ -7,10 +7,10 @@ In this step we're going to turn off the Spring's database initialization, and e
 ## Assert the data is really there
 
 To make the task run or fail faster, add a testcase to `DemoApplicationTest` which checks that the data from `schema.sql` is loaded into the database properly. 
-For that you can `@Autowire` the `talks` repository into the test class and use it to verify that a talk with a given ID can be found in the database. 
+For that you can `@Autowire` the `TalksRepository` into the test class and use it to verify that a talk with a given ID can be found in the database. 
 
 ```java
-Assertions.assertTrue(talks.exists("testcontainers-integration-testing"));
+Assertions.assertTrue(talksRepository.exists("testcontainers-integration-testing"));
 ```
 
 ## Running PostgreSQL explicitly
@@ -22,7 +22,7 @@ In the `AbstractIntegratonTest` please remove `properties` from `@SpringBootTest
 Then you can instantiate a PostgreSQL container using:
 
 ```java
-PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:14-alpine");
+static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 ```
 
 Additionally, we need to start `postgres` container similar to the other service dependencies and configure our application to use that containerized database which can be done by setting the following properties in the `@DynamicPropertySource` annotated method:

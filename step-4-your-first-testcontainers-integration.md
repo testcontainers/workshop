@@ -10,14 +10,14 @@ It means that starting to use Testcontainers in our project \(once we add a depe
 
 ```java
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, properties = {
- "spring.datasource.url=jdbc:tc:postgresql:14-alpine://testcontainers/workshop"
+ "spring.datasource.url=jdbc:tc:postgresql:16-alpine://testcontainers/workshop"
 })
 ```
 
 If we split the magical JDBC url, we see:
 
 * `jdbc:tc:` - this part says that we should use Testcontainers as JDBC provider
-* `postgresql:14-alpine://` - we use a PostgreSQL database, and we select the correct PostgreSQL image from the Docker Hub as the image
+* `postgresql:16-alpine://` - we use a PostgreSQL database, and we select the correct PostgreSQL image from the Docker Hub as the image
 * `testcontainers/workshop` - the host name \(can be anything\) is `testcontainers` and the database name is `workshop`. Your choice!
 
 After adding the properties and run the test again. Fixed? Good!
@@ -51,7 +51,7 @@ checks.disable=true
 
 ## Hint 2:
 
-Changing the PostgreSQL version is as simple as replacing `14-alpine` with, for example, `10-alpine`.
+Changing the PostgreSQL version is as simple as replacing `16-alpine` with, for example, `15-alpine`.
 Try it, but don't forget that it will download the new image from the internet, if it's not already present on your computer.
 
 ### 

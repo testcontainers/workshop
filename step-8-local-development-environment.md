@@ -30,7 +30,7 @@ public class ContainerConfig {
     @Bean
     @ServiceConnection(name = "redis")
     public GenericContainer redis() {
-        return new GenericContainer<>("redis:6-alpine")
+        return new GenericContainer<>("redis:7-alpine")
                 .withExposedPorts(6379);
     }
 }
@@ -83,7 +83,67 @@ Stopping the application will remove the containers just like Testcontainers cle
 ## Hint 1:
 
 You can detach the lifecycle of the containers from the lifecycle of the Spring context by using Dev tools.
-Add the `spring-boot-devtools` dependency. 
+Add the `spring-boot-devtools` dependency.
 Annotate beans and bean methods with `@RestartScope`.
 
-When reloading the project changes with devtools you can see that the containers are not restarted. 
+When reloading the project changes with devtools you can see that the containers are not restarted.
+
+## Connecting to the Database
+Once the application is running, you might want to connect to the database to inspect the data in the database.
+By default, Testcontainers starts the containers and map it to a random available port on the host.
+So, you need to find out the mapped port to connect to the database.
+
+Instead, we can use Testcontainers Desktop fixed ports support to connect to the database.
+
+Open Testcontainers Desktop, and select the `Services` -> `Open config location`.
+It will open a directory with the example configuration files for commonly used services.
+
+Copy the `postgres.toml.example` to `postgres.toml`, and update it's content to the following:
+
+```toml
+ports = [
+  {local-port = 5432, container-port = 5432},
+]
+
+selector.image-names = ["postgres"]
+```
+
+This configuration will map Postgres container port 5432 to the host port 5432.
+Now, when you run the application, you can connect to the database using the following connection details:
+
+```
+host: localhost
+port: 5432
+username: test
+password: test
+database: test
+```
+
+## Reusable Containers
+During the development of the application, you might want to stop and start the application multiple times.
+Instead of creating the containers from scratch every time, you can use the `reuse` feature of Testcontainers.
+
+* Enable the `reuse` feature in Testcontainers Desktop by enabling **Preferences** -> **Enable reusable containers**.
+* Update the Containers configuration to use the `reuse` feature with `.withReuse(true)`:
+
+```java
+@Bean
+@ServiceConnection
+public PostgreSQLContainer<?> postgres() {
+    return new PostgreSQLContainer<>("postgres:16-alpine").withReuse(true);
+}
+```
+
+Now, when you restart the application, you can see that the container is reused from the previous run.
+BY enabling the `reuse` feature, Testcontainers won't remove those reusable containers automatically 
+when the application is stopped or test execution is done.
+
+If you no longer need the container, you can remove it from the Testcontainers Desktop -> **Terminate Containers**.
+
+## Freezing containers to prevent their shutdown to debug
+When you run Testcontainers tests, the containers are automatically stopped and removed after the test execution is done.
+This is a great feature to keep the environment clean and prevent resource leaks.
+But, sometimes you might want to debug the test and inspect the data in the database or the messages in the Kafka topic.
+
+You can use the Testcontainers Desktop **Freeze containers shutdown** feature 
+that will prevent the container shutdown allowing you to debug the issue.
