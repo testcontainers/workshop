@@ -19,7 +19,7 @@ protected RequestSpecification requestSpecification;
 protected int localServerPort;
 
 @BeforeEach
-public void setUpAbstractIntegrationTest() {
+void setUpAbstractIntegrationTest() {
     RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     requestSpecification = new RequestSpecBuilder()
             .setPort(localServerPort)
@@ -39,7 +39,7 @@ Now let's check if the app is actually healthy by doing the following in our `De
 
 ```java
 @Test
-public void healthy() {
+void healthy() {
     given(requestSpecification)
             .when()
             .get("/actuator/health")

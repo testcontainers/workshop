@@ -15,11 +15,11 @@ It should be an abstract class with standard Spring Boot's testing framework ann
 ## Our very first test
 
 Now we need to test that the context starts.  
-Add `com.example.demo.DemoApplicationTest`, extend it from your base class you just created and add a dummy test:
+Add `com.example.demo.DemoApplicationTest`, extend it from your base class `AbstractIntegrationTest` and add a dummy test:
 
 ```java
 @Test
-public void contextLoads() {
+void contextLoads() {
 }
 ```
 
